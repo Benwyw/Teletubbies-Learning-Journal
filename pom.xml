@@ -12,14 +12,58 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring.framework.version>5.3.5</spring.framework.version>
     </properties>
     
     <dependencies>
+        <dependency> 
+            <groupId>javax.servlet</groupId> 
+            <artifactId>javax.servlet-api</artifactId> 
+            <version>3.1.0</version> 
+            <scope>provided</scope> 
+        </dependency> 
+        <dependency> 
+            <groupId>javax.servlet.jsp</groupId> 
+            <artifactId>javax.servlet.jsp-api</artifactId> 
+            <version>2.3.3</version> 
+            <scope>provided</scope> 
+        </dependency> 
+        <dependency> 
+            <groupId>javax.servlet.jsp.jstl</groupId> 
+            <artifactId>javax.servlet.jsp.jstl-api</artifactId> 
+            <version>1.2.2</version> 
+            <scope>compile</scope> 
+        </dependency> 
+        <dependency> 
+            <groupId>org.glassfish.web</groupId> 
+            <artifactId>javax.servlet.jsp.jstl</artifactId> 
+            <version>1.2.5</version> 
+            <scope>compile</scope> 
+            <exclusions> 
+                <exclusion> 
+                    <groupId>javax.servlet</groupId> 
+                    <artifactId>servlet-api</artifactId> 
+                </exclusion> 
+                <exclusion> 
+                    <groupId>javax.servlet.jsp</groupId> 
+                    <artifactId>jsp-api</artifactId> 
+                </exclusion> 
+                <exclusion> 
+                    <groupId>javax.servlet.jsp.jstl</groupId> 
+                    <artifactId>jstl-api</artifactId> 
+                </exclusion> 
+            </exclusions> 
+        </dependency>
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>7.0</version>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>      
+            <groupId>org.springframework</groupId>      
+            <artifactId>spring-webmvc</artifactId>      
+            <version>${spring.framework.version}</version> 
         </dependency>
     </dependencies>
 
@@ -52,7 +96,9 @@
                 <executions>
                     <execution>
                         <phase>package</phase>
-                        <goals><goal>copy</goal></goals>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
