@@ -18,7 +18,7 @@
                 <td colspan = 2><h1>Welcome to Fast Food Ordering System!</h1></td>
             </tr>
             <tr>
-                <th>Foods</th>
+                <th>Food</th>
                 <th>Drinks</th>
             </tr>
             <tr>
