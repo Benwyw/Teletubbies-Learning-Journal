@@ -2,6 +2,8 @@ package ouhk.comps380f.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class IndexController {
@@ -12,4 +14,20 @@ public class IndexController {
         return "index";
         //return "redirect:/ticket/list";
     }
+    
+<<<<<<< Updated upstream
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping(value = "/logout")
+    public String logout() {
+        return "logout";
+    }
+=======
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+>>>>>>> Stashed changes
 }
