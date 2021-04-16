@@ -12,4 +12,13 @@ public class IndexController {
         return "index";
         //return "redirect:/ticket/list";
     }
+    
+    @GetMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping(value = "/logout")
+    public String logout() {
+        return "logout";
+    }
 }
