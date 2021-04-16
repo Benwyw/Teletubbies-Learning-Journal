@@ -15,7 +15,6 @@ public class IndexController {
         //return "redirect:/ticket/list";
     }
     
-<<<<<<< Updated upstream
     @GetMapping(value = "/login")
     public String login() {
         return "login";
@@ -24,10 +23,5 @@ public class IndexController {
     public String logout() {
         return "logout";
     }
-=======
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
->>>>>>> Stashed changes
+    
 }
