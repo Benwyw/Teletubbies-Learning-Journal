@@ -7,24 +7,15 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class IndexController {
-
-    @GetMapping
-    public String index() {
-        System.out.println("Here is a test message on console.");
-        return "index";
-        //return "redirect:/ticket/list";
-    }
-<<<<<<< HEAD
     
-    @GetMapping(value = "/login")
+    @GetMapping
+    public View index() {
+        return new RedirectView("/guestbook", true);
+    }
+
+    @GetMapping("/login")
     public String login() {
         return "login";
     }
-    @GetMapping(value = "/logout")
-    public String logout() {
-        return "logout";
-    }
     
-=======
->>>>>>> parent of 393b34c (login卡關 (有bug))
 }

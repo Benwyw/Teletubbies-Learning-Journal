@@ -8,9 +8,6 @@
         http://www.springframework.org/schema/security 
         http://www.springframework.org/schema/security/spring-security.xsd
 ">
-<<<<<<< Updated upstream
-    <http /> 
-=======
     <http auto-config="true">
         <intercept-url pattern="/guestbook/edit" access="hasRole('ADMIN')" />
         <intercept-url pattern="/guestbook/**" access="hasAnyRole('USER','ADMIN')" /> 
@@ -30,7 +27,6 @@
             token-validity-seconds="1209600"
             remember-me-parameter="remember-me" />
     </http> 
->>>>>>> Stashed changes
     
     <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <b:property name="driverClassName" value="org.apache.derby.jdbc.ClientDriver" />
@@ -39,17 +35,6 @@
         <b:property name="password" value="nbuser" />
     </b:bean>    
     
-<<<<<<< Updated upstream
-    <http auto-config="true"> 
-        <form-login login-page="/login" 
-            authentication-failure-url="/login?error" 
-            username-parameter="username" 
-            password-parameter="password" /> 
-        <logout  logout-url="/logout" logout-success-url="/login?logout" invalidate-session="true" delete-cookies="JSESSIONID" />
-    </http>
-    
-=======
->>>>>>> Stashed changes
     <authentication-manager>
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource" 
@@ -59,8 +44,4 @@
                 "SELECT username, role FROM user_roles WHERE username=?" />
         </authentication-provider>        
     </authentication-manager>
-<<<<<<< Updated upstream
 </b:beans>
-=======
-</b:beans>
->>>>>>> Stashed changes

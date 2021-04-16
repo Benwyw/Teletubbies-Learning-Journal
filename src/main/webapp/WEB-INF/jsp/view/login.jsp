@@ -1,11 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 2021年4月17日, 上午02:16:38
-    Author     : User
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html>
     <body>
     <h1>Login</h1> 
