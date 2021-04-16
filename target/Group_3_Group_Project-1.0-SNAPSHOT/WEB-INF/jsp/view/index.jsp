@@ -37,19 +37,6 @@
             </tr>
         </table>
         <img src="https://pok.benwyw.com/doge.gif">
-        <c:url var="logoutUrl" value="/logout"/>
-        <form action="${logoutUrl}" method="post">
-            <input type="submit" value="Log out" />
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
-        <h1>Login</h1>
-        <form action="login" method='POST'>
-            User: <input type='text' name='username'><br/> 
-            Password: <input type='password' name='password' /><br/> 
-            Remember Me: <input type="checkbox" name="remember-me" /><br/> 
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
-            <input name="submit" type="submit" value="Log In" /><br/> 
-        </form>
     </center>
-</body>
+    </body>
 </html>
