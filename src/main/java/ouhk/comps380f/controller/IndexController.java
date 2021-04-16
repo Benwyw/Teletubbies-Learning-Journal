@@ -14,6 +14,7 @@ public class IndexController {
         return "index";
         //return "redirect:/ticket/list";
     }
+<<<<<<< HEAD
     
     @GetMapping(value = "/login")
     public String login() {
@@ -24,4 +25,6 @@ public class IndexController {
         return "logout";
     }
     
+=======
+>>>>>>> parent of 393b34c (login卡關 (有bug))
 }

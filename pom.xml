@@ -66,6 +66,7 @@
             <version>${spring.framework.version}</version> 
             <scope>compile</scope>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
@@ -96,6 +97,8 @@
             <artifactId>spring-security-taglibs</artifactId>
             <version>${spring.security.version}</version>
         </dependency>
+=======
+>>>>>>> parent of 393b34c (login卡關 (有bug))
     </dependencies>
 
     <build>
