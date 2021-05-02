@@ -1,9 +1,7 @@
-
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Add new item</title>
+        <title>Customer Support</title>
     </head>
     <body>
         <c:url var="logoutUrl" value="/logout"/>
@@ -11,8 +9,7 @@
             <input type="submit" value="Log out" />
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         </form>
-
-        <h2>Create a item</h2>
+        <h2>Create a Item</h2>
         <form:form method="POST" enctype="multipart/form-data"
                    modelAttribute="itemForm">
             <form:label path="itemName">Item Name</form:label><br />
@@ -22,7 +19,6 @@
             <form:label path="isabailability">Item is abailability</form:label><br />
             Is abailability <form:radiobutton path="isabailability" value="true"/>  
             Not abailability <form:radiobutton path="isabailability" value="false"/><br /><br />  
-
             <b>Attachments</b><br />
             <input type="file" name="attachments" multiple="multiple" /><br /><br />
             <input type="submit" value="Submit"/>
