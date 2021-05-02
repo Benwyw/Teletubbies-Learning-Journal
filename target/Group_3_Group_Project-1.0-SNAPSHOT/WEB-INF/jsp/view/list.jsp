@@ -14,6 +14,10 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </security:authorize>
+        
+        <security:authorize access="hasRole('USER')">
+            <a href="<c:url value="/cart" />">Shopping Cart</a><br/>
+        </security:authorize>
 
         <security:authorize access="hasRole('ADMIN') or hasRole('USER')">
             <a href="<c:url value="/guestbook" />">Guestbook</a><br />
