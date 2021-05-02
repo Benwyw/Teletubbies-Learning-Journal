@@ -14,7 +14,7 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </security:authorize>
-        
+
         <security:authorize access="hasRole('ADMIN') or hasRole('USER')">
             <a href="<c:url value="/guestbook" />">Guestbook</a><br />
         </security:authorize>
@@ -29,22 +29,21 @@
             </c:when>
             <c:otherwise>
                 <c:forEach items="${itemDatabase}" var="entry">
-                    Item ${entry.key}:
-                    <a href="<c:url value="/item/view/${entry.key}" />">
-                        <c:out value="${entry.value.itemName}" /></a>
-                    (price: <c:out value="${entry.value.price}" />)<br />
+                    <c:if test="${entry.value.isabailability eq true}">
+                        Item ${entry.key}:
+                        <a href="<c:url value="/item/view/${entry.key}" />">
+                            <c:out value="${entry.value.itemName}" /></a>
+                        (price: <c:out value="${entry.value.price}" />)<br />
 
-                    <security:authorize access="hasRole('ADMIN')">
-                        [<a href="<c:url value="/item/edit/${entry.key}" />">Edit</a>]
-                    </security:authorize>
+                        <security:authorize access="hasRole('ADMIN')">
+                            [<a href="<c:url value="/item/edit/${entry.key}" />">Edit</a>]
+                        </security:authorize>
 
-                    <security:authorize access="hasRole('ADMIN')">
-                        [<a href="<c:url value="/itemt/delete/${entry.key}" />">Delete</a>]
-                    </security:authorize>
-
-
-
-                    <br />
+                        <security:authorize access="hasRole('ADMIN')">
+                            [<a href="<c:url value="/itemt/delete/${entry.key}" />">Delete</a>]
+                        </security:authorize>
+                        <br /> 
+                    </c:if>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
