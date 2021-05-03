@@ -12,7 +12,7 @@
         <title>Cart In-progress</title>
     </head>
     <body>
-        <a href="<c:url value="/cart?action=emptyCart" />">Empty Cart</a>
+        <a href="<c:url value="/cart/empty" />">Empty Cart</a>
         <h1>View Cart</h1>
         <a href="<c:url value="/" />">Product List</a><br /><br />
         <%! @SuppressWarnings("unchecked") %>
@@ -24,9 +24,12 @@
                 Your cart is empty
             </c:when>
             <c:otherwise>
+                cart = ${cart}
                 <ul>
                 <c:forEach var="id" items="${cart}">
-                    <li>${products.id} (qty: ${cart.id})</li>
+                    
+                    <li>itemID=quantity | ${id}</li>
+                    <!--<li>${products.id} (qty: ${cart.id})</li>-->
                 </c:forEach>
                 </ul>
             </c:otherwise>

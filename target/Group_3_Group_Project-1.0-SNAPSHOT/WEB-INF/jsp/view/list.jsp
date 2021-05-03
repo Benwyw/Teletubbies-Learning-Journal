@@ -34,6 +34,9 @@
                         <a href="<c:url value="/item/view/${item.id}" />">
                             <c:out value="${item.itemName}" /></a>
                         (price: <c:out value="${item.price}" />)
+                        <security:authorize access="hasRole('USER')">
+                            [<a href="<c:url value="/cart/add/${item.id}" />">Add to Cart</a>]
+                        </security:authorize>
                         <security:authorize access="hasRole('ADMIN')">
                             [<a href="<c:url value="/item/edit/${item.id}" />">Edit</a>]
                         </security:authorize>

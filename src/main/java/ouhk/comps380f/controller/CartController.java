@@ -36,7 +36,14 @@ public class CartController {
     @GetMapping
     public String list(ModelMap model) {
         model.addAttribute("products", this.products);
+        System.out.println(this.products);
         return "viewCart";
+    }
+    
+    @GetMapping("/empty")
+    private String emptyCart(HttpSession session, ModelMap model) {
+        session.removeAttribute("cart");
+        return "redirect:/cart";
     }
     
     @GetMapping("/add/{itemId}")
@@ -60,7 +67,7 @@ public class CartController {
             cart.put(productId, 0);
         }
         cart.put(productId, cart.get(productId) + 1);
-
+        System.out.println(cart);
         return "redirect:/cart";
     }
 
