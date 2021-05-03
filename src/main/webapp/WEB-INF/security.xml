@@ -37,10 +37,10 @@
 
     <context:annotation-config />
 
-    <b:bean id="ticketUserService" class="ouhk.comps380f.service.TicketUserService" />
+    <b:bean id="itemUserService" class="ouhk.comps380f.service.ItemUserService" />
 
     <authentication-manager>
-        <authentication-provider user-service-ref="ticketUserService" />
+        <authentication-provider user-service-ref="itemUserService" />
     </authentication-manager>
     
     
