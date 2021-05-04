@@ -4,8 +4,8 @@
         <title>Customer Support</title>
     </head>
     <body>
-        <a href="<c:url value="/login" />">Login</a><br />
-
+            <a href="<c:url value="/login" />">Login</a><br />
+            
         <security:authorize access="hasRole('ADMIN') or hasRole('USER')">
             <c:url var="logoutUrl" value="/logout"/>
             <form action="${logoutUrl}" method="post">

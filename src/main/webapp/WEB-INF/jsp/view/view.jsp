@@ -29,8 +29,8 @@
     <c:forEach items="${item.attachments}" var="attachment"
                varStatus="status">
         <c:if test="${!status.first}">, </c:if>
-        <a href="<c:url value="/item/${item.id}/attachment/${attachment.name}" />">
-          <c:out value="${attachment.name}" /></a>
+        
+      <img src='<c:url value="/item/${item.id}/attachment/${attachment.name}"></c:url>' />      
     </c:forEach><br /><br />
 </c:if>
 <a href="<c:url value="/item" />">Return to list items</a>
