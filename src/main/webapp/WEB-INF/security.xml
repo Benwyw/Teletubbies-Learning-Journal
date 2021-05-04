@@ -26,7 +26,8 @@
     </b:bean> 
 
     <http auto-config="true">
-        <intercept-url pattern="/item/delete/**" access="hasRole('ADMIN')" /> 
+        <intercept-url pattern="/item/delete/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/cart/**" access="hasRole('USER')" /> 
        
         <form-login login-page="/login" authentication-failure-url="/login?error" />
         <logout logout-success-url="/item"
