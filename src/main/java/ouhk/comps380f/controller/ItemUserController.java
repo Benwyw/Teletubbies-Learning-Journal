@@ -35,6 +35,9 @@ public class ItemUserController {
     public static class Form {
         private String username;
         private String password;
+        private String fullname;
+        private String phone;
+        private String address;
         private String[] roles;
 
         public String getUsername() {
@@ -60,6 +63,31 @@ public class ItemUserController {
         public void setRoles(String[] roles) {
             this.roles = roles;
         } 
+
+        public String getFullname() {
+            return fullname;
+        }
+
+        public void setFullname(String fullname) {
+            this.fullname = fullname;
+        }
+
+        public String getPhone() {
+            return phone;
+        }
+
+        public void setPhone(String phone) {
+            this.phone = phone;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+        
     }
 
     @GetMapping("/create")
@@ -70,10 +98,24 @@ public class ItemUserController {
     @PostMapping("/create")
     public View create(Form form) throws IOException {
         ItemUser user = new ItemUser(form.getUsername(),
-                form.getPassword(), form.getRoles()
+               form.getPassword(), form.getRoles(),form.getFullname(),form.getPhone(),form.getAddress()
         );
         itemUserRepo.save(user);
         return new RedirectView("/user/list", true);
+    }
+    @GetMapping("/register")
+    public ModelAndView register() {
+        return new ModelAndView("registerUser", "reitemUser", new Form());
+    }
+
+    @PostMapping("/register")
+    public View register(Form form) throws IOException {
+        String[] role={"ROLE_USER"};
+        ItemUser user = new ItemUser(form.getUsername(),
+                form.getPassword(),role,form.getFullname(),form.getPhone(),form.getAddress()
+        );
+        itemUserRepo.save(user);
+        return new RedirectView("/login", true);
     }
 
     @GetMapping("/delete/{username}")

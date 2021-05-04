@@ -23,6 +23,12 @@ public class ItemUser implements Serializable {
     private String username;
 
     private String password;
+    
+    private String fullname;
+    
+    private String phone;
+    
+    private String address;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL, orphanRemoval = true)
@@ -31,9 +37,12 @@ public class ItemUser implements Serializable {
     public ItemUser() {
     }
 
-    public ItemUser(String username, String password, String[] roles) {
+    public ItemUser(String username, String password, String[] roles, String fullname, String phone, String address) {
         this.username = username;
         this.password = "{noop}" + password;
+        this.fullname = fullname;
+        this.phone = phone;
+        this.address = address;
         for (String role : roles) {
             this.roles.add(new UserRole(this,role));   
         }
@@ -64,5 +73,31 @@ public class ItemUser implements Serializable {
     public void setRoles(List<UserRole> roles) {
         this.roles = roles;
     }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
     
 }
