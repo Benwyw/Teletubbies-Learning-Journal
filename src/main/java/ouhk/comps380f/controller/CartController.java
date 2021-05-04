@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,19 +25,22 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import ouhk.comps380f.model.Attachment;
 import ouhk.comps380f.model.Item;
+import ouhk.comps380f.service.ItemService;
 import ouhk.comps380f.view.DownloadingView;
 
 @Controller
 @RequestMapping("/cart")
 public class CartController {
 
-    private Map<Long, Item> itemDatabase = new Hashtable<>();
-    private final Map<Integer, String> products = new Hashtable<>();
+    //private Map<Long, Item> itemDatabase = new Hashtable<>();
+    //private final Map<Integer, String> products = new Hashtable<>();
+    @Autowired
+    private ItemService itemService;
 
-    @GetMapping
+    @GetMapping({"", "/viewCart"})
     public String list(ModelMap model) {
-        model.addAttribute("products", this.products);
-        System.out.println(this.products);
+        model.addAttribute("itemDatabase", itemService.getItem());
+        System.out.println(itemService.getItem());
         return "viewCart";
     }
     
@@ -44,6 +48,12 @@ public class CartController {
     private String emptyCart(HttpSession session, ModelMap model) {
         session.removeAttribute("cart");
         return "redirect:/cart";
+    }
+    
+    @GetMapping("/checkout")
+    private String checkout(HttpSession session, ModelMap model) {
+        session.removeAttribute("cart");
+        return "checkout";
     }
     
     @GetMapping("/add/{itemId}")

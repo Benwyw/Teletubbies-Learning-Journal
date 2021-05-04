@@ -18,22 +18,23 @@
         <%! @SuppressWarnings("unchecked") %>
         <c:set var="products" value="${products}" />
         <c:set var="cart" value="${cart}" />
+        <c:set var="item" value="${itemDatabase}" />
         
         <c:choose>
             <c:when test="${empty cart}">
-                Your cart is empty
+                Your cart is empty<br><br>
+                <u>Checkout (Disabled)</u>
+                <i>Please add item in order to checkout</i>
             </c:when>
             <c:otherwise>
-                cart = ${cart}
                 <ul>
-                <c:forEach var="id" items="${cart}">
-                    
-                    <li>itemID=quantity | ${id}</li>
-                    <!--<li>${products.id} (qty: ${cart.id})</li>-->
-                </c:forEach>
+                    <c:forEach var="id" items="${cart}">
+                        <li>${item[id.key-1].itemName} (qty: ${id.value})</li>
+                    </c:forEach>
                 </ul>
+                <br>
+                <a href="<c:url value="/cart/checkout" />">Checkout</a>
             </c:otherwise>
         </c:choose>
-
     </body>
 </html>
