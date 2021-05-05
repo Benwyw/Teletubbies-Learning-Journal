@@ -181,4 +181,10 @@ public class ItemUserController {
 
         return modelAndView;
     }
+    
+    @GetMapping({"/orderHistory"})
+    public View orderHistory(Principal principal) {
+        String path = "/user/editUser/"+principal.getName();
+        return new RedirectView(path, true);
+    }
 }

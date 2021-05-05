@@ -10,6 +10,7 @@ import java.security.Principal;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
+import ouhk.comps380f.dao.OrderHistoryRepository;
 import ouhk.comps380f.model.Attachment;
 import ouhk.comps380f.model.Item;
+import ouhk.comps380f.model.OrderHistory;
 import ouhk.comps380f.service.ItemService;
+import ouhk.comps380f.service.OrderHistoryService;
 import ouhk.comps380f.view.DownloadingView;
 
 @Controller
@@ -36,6 +40,11 @@ public class CartController {
     //private final Map<Integer, String> products = new Hashtable<>();
     @Autowired
     private ItemService itemService;
+    
+    @Autowired
+    private OrderHistoryService orderhistoryService;
+    @Resource
+    OrderHistoryRepository orderHistoryRepo;
 
     @GetMapping({"", "/viewCart"})
     public String list(ModelMap model) {
@@ -51,7 +60,13 @@ public class CartController {
     }
     
     @GetMapping("/checkout")
-    private String checkout(HttpSession session, ModelMap model) {
+    private String checkout(HttpSession session, ModelMap model, Principal principal) {
+        String name = principal.getName();
+        
+        OrderHistory orderhistory = orderhistoryService.getOrderHistory(name);
+        System.out.println("OH: "+orderhistory);
+        System.out.println("Repo: "+orderHistoryRepo.findAll());
+        
         session.removeAttribute("cart");
         return "checkout";
     }
