@@ -251,7 +251,6 @@ public class ItemUserController {
         modelAndView.addObject("user", user);
 
         Form useredituserForm = new Form();
-        useredituserForm.setUsername(user.getUsername());
         useredituserForm.setPassword(user.getPassword());
         useredituserForm.setFullname(user.getFullname());
         useredituserForm.setPhone(user.getPhone());

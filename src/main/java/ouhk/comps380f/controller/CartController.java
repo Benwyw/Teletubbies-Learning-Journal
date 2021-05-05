@@ -10,6 +10,8 @@ import java.security.Principal;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -49,7 +51,6 @@ public class CartController {
     @GetMapping({"", "/viewCart"})
     public String list(ModelMap model) {
         model.addAttribute("itemDatabase", itemService.getItem());
-        System.out.println(itemService.getItem());
         return "viewCart";
     }
     
@@ -59,16 +60,43 @@ public class CartController {
         return "redirect:/cart";
     }
     
+    @GetMapping("/orderHistory")
+    private String orderhistory(HttpSession session, ModelMap model, Principal principal) {
+        String name = principal.getName();
+        
+        List<OrderHistory> orderhistory = orderhistoryService.getOrderHistory(name);
+        
+        model.addAttribute("orderhistory", orderhistory);
+        model.addAttribute("itemDatabase", itemService.getItem());
+        
+        return "orderhistory";
+    }
+    
     @GetMapping("/checkout")
     private String checkout(HttpSession session, ModelMap model, Principal principal) {
         String name = principal.getName();
         
-        OrderHistory orderhistory = orderhistoryService.getOrderHistory(name);
-        System.out.println("OH: "+orderhistory);
-        System.out.println("Repo: "+orderHistoryRepo.findAll());
+        session.getAttribute("cart");
+        Map<Integer, Integer> cart
+                = (Map<Integer, Integer>) session.getAttribute("cart");
+        System.out.println("cart: "+cart);
         
-        session.removeAttribute("cart");
-        return "checkout";
+        if (cart != null){
+            for (Map.Entry<Integer, Integer> entry : cart.entrySet()){
+                System.out.println(entry.getKey() + "/" + entry.getValue());
+
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+                LocalDateTime now = LocalDateTime.now();
+
+                orderhistoryService.createOrderHistory(name, (int)entry.getKey(), (int)entry.getValue(), now.toString());
+            }
+        
+            session.removeAttribute("cart");
+            return "checkout";
+        }
+        else{
+            return "redirect:/item/list";
+        }
     }
     
     @GetMapping("/add/{itemId}")
