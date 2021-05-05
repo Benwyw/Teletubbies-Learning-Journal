@@ -110,7 +110,12 @@ public class ItemController {
             return "redirect:/item/list";
         }
         model.addAttribute("item", item);
-        model.addAttribute("username", principal.getName());
+        /*String username = "";
+        if(!principal.getName().equals(null)){
+            username = principal.getName();
+        }
+        
+        model.addAttribute("username", username);*/
         
         return "view";
     }

@@ -101,6 +101,6 @@ public class Item implements Serializable {
     }
      public void deleteComment(Comment comment) {
         comment.setItem_comment(null);
-        this.attachments.remove(comment);
+        this.comments.remove(comment);
     }
 }

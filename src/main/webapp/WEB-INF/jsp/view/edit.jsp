@@ -16,9 +16,9 @@
             <form:input type="text" path="itemName" /><br /><br />
             <form:label path="price">Price</form:label><br/>
             <form:input type="number" path="price" /><br /><br />
-            <form:label path="isabailability">Item is abailability</form:label><br />
-            Is abailability <form:radiobutton path="isabailability" value="true"/>  
-            Not abailability <form:radiobutton path="isabailability" value="false"/><br /><br />  
+            <form:label path="isabailability">Item is available</form:label><br />
+            Is available <form:radiobutton path="isabailability" value="true"/>  
+            Not available <form:radiobutton path="isabailability" value="false"/><br /><br />  
             <c:if test="${fn:length(item.attachments) > 0}">
                 <b>Attachments:</b><br/>
                 <ul>
