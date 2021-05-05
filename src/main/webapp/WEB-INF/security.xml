@@ -29,11 +29,14 @@
         <intercept-url pattern="/item/delete/**" access="hasRole('ADMIN')" /> 
         <intercept-url pattern="/user/create" access="hasRole('ADMIN')" />
         <intercept-url pattern="/user/delete/**" access="hasRole('ADMIN')" />
+        <intercept-url pattern="/user/editUser" access="hasRole('ADMIN') or hasRole('USER')" />
+        <intercept-url pattern="/user/editUser/**" access="hasRole('ADMIN') or hasRole('USER')" />
+        <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/item/create" access="hasRole('ADMIN')" />
         <intercept-url pattern="/item/edit/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/item/delete/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/cart/add/**" access="hasRole('USER') or hasRole('ADMIN') "/>
-        <intercept-url pattern="/cart" access="hasRole('USER') or hasRole('ADMIN') " /> 
+        <intercept-url pattern="/cart/**" access="hasRole('USER') or hasRole('ADMIN') " /> 
 
        
         <form-login login-page="/login" authentication-failure-url="/login?error" />

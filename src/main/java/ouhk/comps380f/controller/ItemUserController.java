@@ -135,9 +135,22 @@ public class ItemUserController {
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
+    
+    @GetMapping({"/editUser"})
+    public View editUser(Principal principal) {
+        String path = "/user/editUser/"+principal.getName();
+        return new RedirectView(path, true);
+    }
+    
      @GetMapping("/editUser/{username}")
     public ModelAndView showEdit(@PathVariable("username")  String username,
             Principal principal, HttpServletRequest request) {
+        //Security: If role is not admin, then check if the user to be edited equals current user
+        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")){
+            if (!principal.getName().equals(username)){
+                return new ModelAndView("list"); //No permission to access
+            }
+        }
         ItemUser user = itemUserService.getItemUser(username);
         if (user == null ) {
             return new ModelAndView(new RedirectView("/item/list", true));
@@ -148,8 +161,13 @@ public class ItemUserController {
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         //String[] rolelist = authorities.toArray(new String[0]);
-
-        ModelAndView modelAndView = new ModelAndView("editUser");
+        ModelAndView modelAndView;
+        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")){
+            modelAndView = new ModelAndView("editUser2"); //user view
+        }
+        else{
+            modelAndView = new ModelAndView("editUser"); //admin view
+        }
         modelAndView.addObject("user", user);
 
         Form edituserForm = new Form();
