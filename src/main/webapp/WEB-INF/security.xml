@@ -32,6 +32,7 @@
         <intercept-url pattern="/user/editUser" access="hasRole('ADMIN') or hasRole('USER')" />
         <intercept-url pattern="/user/editUser/**" access="hasRole('ADMIN') or hasRole('USER')" />
         <intercept-url pattern="/user/register" access="isAnonymous()" />
+        <intercept-url pattern="/user/editUser2/**" access="hasRole('ADMIN') or hasRole('USER')" />
         <intercept-url pattern="/user/**" access="hasRole('ADMIN')" />
         <intercept-url pattern="/item/create" access="hasRole('ADMIN')" />
         <intercept-url pattern="/item/edit/**" access="hasRole('ADMIN')" />

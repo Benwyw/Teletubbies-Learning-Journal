@@ -11,7 +11,7 @@
         </form>
         <h2>User #${user.username}</h2>
         <form:form method="POST" enctype="multipart/form-data"
-                   modelAttribute="edituserForm">
+                   modelAttribute="useredituserForm">
             <form:label path="username">Username</form:label><br/>
             <form:input type="text" path="username" /><br/><br/>
             <form:label path="password">Password</form:label><br/>

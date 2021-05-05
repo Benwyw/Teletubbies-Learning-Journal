@@ -4,17 +4,18 @@
         <title>Customer Support</title>
     </head>
     <body>
-            <a href="<c:url value="/login" />">Login</a><br />
-            
+        <a href="<c:url value="/login" />">Login</a><br />
+
         <security:authorize access="hasRole('ADMIN') or hasRole('USER')">
             <c:url var="logoutUrl" value="/logout"/>
             <form action="${logoutUrl}" method="post">
                 <input type="submit" value="Log out" />
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
-            <a href="<c:url value="/user/editUser" />">Update personal info</a>
         </security:authorize>
-
+        <security:authorize access=" hasRole('USER')">
+            <a href="<c:url value="/user/editUser2" />">Update personal info</a>
+        </security:authorize>
         <h2>Items</h2>
         <security:authorize access="hasRole('ADMIN')">    
             <a href="<c:url value="/user" />">Manage User Accounts</a><br /><br />

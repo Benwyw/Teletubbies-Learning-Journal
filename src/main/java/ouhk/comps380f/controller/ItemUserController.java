@@ -137,13 +137,24 @@ public class ItemUserController {
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
-//for user
+//for admin
+
     @GetMapping({"/editUser"})
     public View editUser(Principal principal) {
         String path = "/user/editUser/" + principal.getName();
         return new RedirectView(path, true);
     }
 //
+    //for user
+
+    @GetMapping({"/editUser2"})
+    public View usereditUser(Principal principal) {
+        String path = "/user/editUser2/" + principal.getName();
+        return new RedirectView(path, true);
+    }
+  
+//
+
     @GetMapping("/editUser/{username}")
     public ModelAndView showEdit(@PathVariable("username") String username,
             Principal principal, HttpServletRequest request) {
@@ -193,10 +204,58 @@ public class ItemUserController {
             return new RedirectView("/user/list", true);
         }
         itemUserService.updateItemUser(username, form.getPassword(),
-                form.getFullname(), form.getPhone(),form.getAddress(),form.getRoles());
+                form.getFullname(), form.getPhone(), form.getAddress(), form.getRoles());
         return new RedirectView("/user/list", true);
     }
- //for user   
-  
+    //for user   
+
+    @GetMapping("/editUser2/{username}")
+    public ModelAndView usershowEdit(@PathVariable("username") String username,
+            Principal principal, HttpServletRequest request) {
+        //Security: If role is not admin, then check if the user to be edited equals current user
+        if (!principal.getName().equals(username)) {
+            return new ModelAndView("list"); //No permission to access
+        }
+        ItemUser user = itemUserService.getItemUser(username);
+        if (user == null) {
+            return new ModelAndView(new RedirectView("/item/list", true));
+        }
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (UserRole role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+
+        ModelAndView modelAndView;
+
+        modelAndView = new ModelAndView("editUser2"); //user view
+
+        modelAndView.addObject("user", user);
+
+        Form useredituserForm = new Form();
+        useredituserForm.setUsername(user.getUsername());
+        useredituserForm.setPassword(user.getPassword());
+        useredituserForm.setFullname(user.getFullname());
+        useredituserForm.setPhone(user.getPhone());
+        useredituserForm.setAddress(user.getAddress());
+        // edituserForm.setRoles(rolelist);
+        modelAndView.addObject("useredituserForm", useredituserForm);
+
+        return modelAndView;
+    }
+
+    @PostMapping("/editUser2/{username}")
+    public View userEditUser(@PathVariable("username") String username, Form form,
+            Principal principal, HttpServletRequest request)
+            throws IOException, UserNotFound {
+        ItemUser itemUser = itemUserService.getItemUser(username);
+        if (itemUser == null) {
+            return new RedirectView("/item/list", true);
+        }
+        String[] role = {"ROLE_USER"};
+        itemUserService.updateItemUser(username, form.getPassword(),
+                form.getFullname(), form.getPhone(), form.getAddress(), role);
+        return new RedirectView("/item/list", true);
+    }
     //
 }
