@@ -137,13 +137,13 @@ public class ItemUserController {
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
-
+//for user
     @GetMapping({"/editUser"})
     public View editUser(Principal principal) {
         String path = "/user/editUser/" + principal.getName();
         return new RedirectView(path, true);
     }
-
+//
     @GetMapping("/editUser/{username}")
     public ModelAndView showEdit(@PathVariable("username") String username,
             Principal principal, HttpServletRequest request) {
@@ -196,4 +196,7 @@ public class ItemUserController {
                 form.getFullname(), form.getPhone(),form.getAddress(),form.getRoles());
         return new RedirectView("/user/list", true);
     }
+ //for user   
+  
+    //
 }

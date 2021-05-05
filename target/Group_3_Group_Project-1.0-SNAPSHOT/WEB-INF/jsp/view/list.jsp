@@ -30,7 +30,8 @@
             </c:when>
             <c:otherwise>
                 <c:forEach items="${itemDatabase}" var="item">
-                    <c:if test="${item.isabailability eq true}">
+                    <security:authorize var="isAdmin" access="hasAnyRole('ADMIN')"/>
+                    <c:if test="${item.isabailability eq true or isAdmin}">
                         Item ${item.id}:
                         <a href="<c:url value="/item/view/${item.id}" />">
                             <c:out value="${item.itemName}" /></a>
