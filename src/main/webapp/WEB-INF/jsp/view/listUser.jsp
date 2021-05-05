@@ -32,6 +32,7 @@
             <td>${user.phone}</td>
             <td>${user.address}</td>
             <td>
+            [<a href="<c:url value="/user/editUser/${user.username}" />">Edit</a>]    
             [<a href="<c:url value="/user/delete/${user.username}" />">Delete</a>]
             
             </td>

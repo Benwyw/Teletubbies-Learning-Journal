@@ -6,7 +6,14 @@
 package ouhk.comps380f.controller;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,11 +25,16 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import ouhk.comps380f.dao.ItemUserRepository;
 import ouhk.comps380f.model.ItemUser;
+import ouhk.comps380f.model.UserRole;
+import ouhk.comps380f.service.ItemUserService;
 
 
 @Controller
 @RequestMapping("/user")
 public class ItemUserController {
+     
+    @Autowired
+    private ItemUserService itemUserService;
      @Resource
     ItemUserRepository itemUserRepo;
 
@@ -122,5 +134,33 @@ public class ItemUserController {
     public View deleteTicket(@PathVariable("username") String username) {
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
+    }
+     @GetMapping("/editUser/{username}")
+    public ModelAndView showEdit(@PathVariable("username")  String username,
+            Principal principal, HttpServletRequest request) {
+        ItemUser user = itemUserService.getItemUser(username);
+        if (user == null ) {
+            return new ModelAndView(new RedirectView("/item/list", true));
+        }
+        
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        for (UserRole role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+        //String[] rolelist = authorities.toArray(new String[0]);
+
+        ModelAndView modelAndView = new ModelAndView("editUser");
+        modelAndView.addObject("user", user);
+
+        Form edituserForm = new Form();
+        edituserForm.setUsername(user.getUsername());
+        edituserForm.setPassword(user.getPassword());
+        edituserForm.setFullname(user.getFullname());
+        edituserForm.setPhone(user.getPhone());
+        edituserForm.setAddress(user.getAddress());
+       // edituserForm.setRoles(rolelist);
+        modelAndView.addObject("edituserForm", edituserForm);
+
+        return modelAndView;
     }
 }

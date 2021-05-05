@@ -32,4 +32,8 @@ public class ItemUserService implements UserDetailsService {
         }
         return new User(itemUser.getUsername(), itemUser.getPassword(), authorities);
     }
+    
+     public ItemUser getItemUser(String username) {  
+        return itemUserRepo.findById(username).orElse(null);
+    }
 }
