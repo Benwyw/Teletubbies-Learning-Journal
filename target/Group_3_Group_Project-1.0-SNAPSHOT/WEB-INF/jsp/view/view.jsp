@@ -35,7 +35,10 @@
         }
     </style>
     <body>
-        <a href="<c:url value="/login" />">Login</a><br />
+        <security:authorize access="!isAuthenticated()"> 
+            <a href="<c:url value="/login" />">Login</a>
+        </security:authorize>
+
 
         <security:authorize var="isAdmin" access="hasAnyRole('ADMIN')"/>
         <security:authentication var="principal" property="principal" /> 
@@ -59,7 +62,7 @@
         <i>Item Name - <c:out value="${item.itemName}" /></i><br /><br />
         <c:out value="${item.price}" /><br /><br />
         <c:if test="${fn:length(item.attachments) > 0}">
-            Attachments:
+            Attachments: <br/>
             <c:forEach items="${item.attachments}" var="attachment"
                        varStatus="status">
                 <c:if test="${!status.first}">, </c:if>
@@ -86,7 +89,7 @@
                                     <span style="color: red"> [<a style="color: red" href="<c:url value="/item/deletecomment/${item.id}/${comment.id}" />">Delete Comment</a>]</span>
                                 </c:if>
                             </security:authorize>
-                            
+
                         </p>
                     </div>
                 </div>

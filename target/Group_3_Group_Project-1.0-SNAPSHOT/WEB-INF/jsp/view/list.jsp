@@ -39,7 +39,9 @@
         <h2>Items</h2>
         <security:authorize access="hasRole('ADMIN')">    
             <a href="<c:url value="/user" />">Manage User Accounts</a><br /><br />
-            <a href="<c:url value="/item/create" />">Create a Item</a><br /><br />
+            <security:authorize access="hasAnyRole('ADMIN')">
+                <a href="<c:url value="/item/create" />">Create a Item</a><br /><br />
+            </security:authorize>
         </security:authorize>
         <security:authorize access="hasRole('USER')">
             <a href="<c:url value="/cart" />">Shopping Cart</a><br/>

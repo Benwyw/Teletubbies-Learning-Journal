@@ -16,9 +16,9 @@
             <form:input type="text" path="itemName" /><br /><br />
             <form:label path="price">Price</form:label><br />
             <form:input type="number" path="price" /><br /><br />
-            <form:label path="isabailability">Item is abailability</form:label><br />
-            Is abailability <form:radiobutton path="isabailability" value="true"/>  
-            Not abailability <form:radiobutton path="isabailability" value="false"/><br /><br />  
+            <form:label path="isabailability">Item is available</form:label><br />
+            Is available <form:radiobutton path="isabailability" value="true"/>  
+            Not available <form:radiobutton path="isabailability" value="false"/><br /><br />  
             <b>Attachments</b><br />
             <input type="file" name="attachments" multiple="multiple" /><br /><br />
             <input type="submit" value="Submit"/>
