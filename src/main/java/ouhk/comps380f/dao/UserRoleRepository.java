@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ouhk.comps380f.model.UserRole;
 
 public interface UserRoleRepository extends JpaRepository<UserRole, Integer> {
+    public String[] findByUsername(String username);
 }

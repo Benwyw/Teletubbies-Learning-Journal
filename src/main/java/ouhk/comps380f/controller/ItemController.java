@@ -43,7 +43,7 @@ public class ItemController {
         model.addAttribute("itemDatabase", itemService.getItem());
         return "list";
     }
-
+    
     @GetMapping("/create")
     public ModelAndView create() {
         return new ModelAndView("add", "itemForm", new Form());
