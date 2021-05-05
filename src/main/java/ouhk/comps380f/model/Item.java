@@ -39,6 +39,11 @@ public class Item implements Serializable {
             cascade = CascadeType.ALL, orphanRemoval = true)
     @Fetch(FetchMode.SUBSELECT)
     private List<Attachment> attachments = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "item_comment", fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
+    private List<Comment> comments = new ArrayList<>();
 
     // getters and setters of all properties
 
@@ -82,8 +87,20 @@ public class Item implements Serializable {
         this.attachments = attachments;
     }
     
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+    
      public void deleteAttachment(Attachment attachment) {
         attachment.setItem(null);
         this.attachments.remove(attachment);
+    }
+     public void deleteComment(Comment comment) {
+        comment.setItem_comment(null);
+        this.attachments.remove(comment);
     }
 }

@@ -7,10 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ouhk.comps380f.dao.AttachmentRepository;
+import ouhk.comps380f.dao.CommentRepository;
 import ouhk.comps380f.dao.ItemRepository;
 import ouhk.comps380f.exception.AttachmentNotFound;
+import ouhk.comps380f.exception.CommentNotFound;
 import ouhk.comps380f.exception.ItemNotFound;
 import ouhk.comps380f.model.Attachment;
+import ouhk.comps380f.model.Comment;
 import ouhk.comps380f.model.Item;
 
 
@@ -22,6 +25,9 @@ public class ItemServiceImpl implements ItemService {
 
     @Resource
     private AttachmentRepository attachmentRepo;
+    
+    @Resource
+    private CommentRepository commentRepo;
 
     @Override
     @Transactional
@@ -111,6 +117,47 @@ public class ItemServiceImpl implements ItemService {
             }
         }
         itemRepo.save(updatedItem);
+    }
+    
+    @Override
+    @Transactional(rollbackFor = CommentNotFound.class)
+    public void deleteComment(long id, long comment_id) throws CommentNotFound {
+        Item item = itemRepo.findById(id).orElse(null);
+        for (Comment comment : item.getComments()) {
+            if (comment.getId()==comment_id) {
+                item.deleteComment(comment);
+                itemRepo.save(item);
+                return;
+            }
+        }
+        throw new CommentNotFound();
+    }
+    
+    @Override
+    @Transactional(rollbackFor=CommentNotFound.class)
+    public void createComment(long item_id,String username,String message)throws ItemNotFound{
+        Item updatedItem = itemRepo.findById(item_id).orElse(null);
+        if (updatedItem == null) {
+            throw new ItemNotFound();
+        }
+        Comment comment=new Comment();
+        comment.setComment(message);
+        comment.setUsername(username);
+        comment.setItem_comment(updatedItem);
+        updatedItem.getComments().add(comment);
+        itemRepo.save(updatedItem);
+    }
+    @Override
+    @Transactional(rollbackFor=CommentNotFound.class)
+    public void updateComment(long id,String message)throws CommentNotFound{
+        Comment updatedComment=commentRepo.findById(id).orElse(null);
+        if (updatedComment == null) {
+            throw new CommentNotFound();
+        }
+        updatedComment.setComment(message);
+        
+        
+        commentRepo.save(updatedComment);
     }
 
 }

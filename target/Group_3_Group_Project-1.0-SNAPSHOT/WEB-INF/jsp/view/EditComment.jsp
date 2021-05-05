@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Edit Comment</title>
+        <title>Add Comment</title>
     </head>
     <body>
-        <h1>Edit Comment</h1>
-        <form:form method="post" modelAttribute="entry">
-            <form:label path="name">Name:</form:label> 
-            <form:input type="text" path="name"/> <br />
-            <form:textarea path="message" /> <br />
-            <input type="submit" name="save" value="Save" />
+        <h1>Add Comment</h1>
+        <form:form method="POST" enctype="multipart/form-data"
+                   modelAttribute="cm">
+            <form:textarea path="message"></form:textarea> <br />
+                <input type="submit" value="Add" />
         </form:form>
     </body>
 </html>
