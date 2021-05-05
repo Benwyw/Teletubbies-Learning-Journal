@@ -188,6 +188,18 @@ public class ItemUserController {
         edituserForm.setFullname(user.getFullname());
         edituserForm.setPhone(user.getPhone());
         edituserForm.setAddress(user.getAddress());
+        List<String> string_arrayList = new ArrayList<String>();
+        for (UserRole role : user.getRoles()) {
+            string_arrayList.add(role.getRole());
+        }
+        
+        
+       /* String[] temp = {};
+        for(int i = 0; i < user.getRoles().size();i++){
+                temp[i] = user.getRoles().get(i).getRole();
+        }*/
+       
+        edituserForm.setRoles(string_arrayList.toArray(new String[0]));
         // edituserForm.setRoles(rolelist);
         modelAndView.addObject("edituserForm", edituserForm);
 
