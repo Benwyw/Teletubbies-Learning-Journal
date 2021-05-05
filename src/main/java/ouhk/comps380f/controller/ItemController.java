@@ -21,10 +21,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import ouhk.comps380f.exception.AttachmentNotFound;
+import ouhk.comps380f.exception.CommentNotFound;
 import ouhk.comps380f.exception.ItemNotFound;
 import ouhk.comps380f.model.Attachment;
 import ouhk.comps380f.model.Item;
 import ouhk.comps380f.service.AttachmentService;
+import ouhk.comps380f.service.CommentService;
 import ouhk.comps380f.service.ItemService;
 import ouhk.comps380f.view.DownloadingView;
 
@@ -37,6 +39,9 @@ public class ItemController {
 
     @Autowired
     private AttachmentService attachmentService;
+    
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping({"", "/list"})
     public String list(ModelMap model) {
@@ -99,12 +104,14 @@ public class ItemController {
 
     @GetMapping("/view/{itemId}")
     public String view(@PathVariable("itemId") long itemId,
-            ModelMap model) {
+            ModelMap model,Principal principal) {
         Item item = itemService.getItem(itemId);
         if (item == null) {
             return "redirect:/item/list";
         }
         model.addAttribute("item", item);
+        model.addAttribute("username", principal.getName());
+        
         return "view";
     }
 
@@ -168,5 +175,52 @@ public class ItemController {
             throws ItemNotFound {
         itemService.delete(itemId);
         return "redirect:/item/list";
+    }
+    
+    public static class CM{
+        String message;
+
+        public String getMessage() {
+            return message;
+        }
+
+        public void setMessage(String message) {
+            this.message = message;
+        }
+        
+        
+    }
+    
+    @GetMapping("/addcomment/{itemId}")
+    public ModelAndView addComment() {
+        return new ModelAndView ("AddComment","cm",new CM());
+    }
+    
+    @PostMapping("/addcomment/{itemId}")
+    public String addingComment(@PathVariable("itemId") long itemId,Principal principal, CM cm) throws ItemNotFound{
+        
+        itemService.createComment(itemId, principal.getName(), cm.getMessage());
+        return "redirect:/item/view/" + itemId;
+    }
+    
+    @GetMapping("/deletecomment/{itemId}/{commentid}")
+    public String deleteComment(@PathVariable("itemId") long itemId,@PathVariable("commentid") long commentid)
+            throws CommentNotFound {
+        itemService.deleteComment(itemId,commentid);
+        return "redirect:/item/view/" + itemId;
+    }
+    
+    @GetMapping("/editcomment/{itemId}/{commentid}")
+    public ModelAndView editComment(@PathVariable("commentid") long commentid){
+        CM cm=new CM();
+        cm.setMessage(commentService.getComments(commentid).getComment());
+        return new ModelAndView ("EditComment","cm",cm);
+    }
+    
+    @PostMapping("/editcomment/{itemId}/{commentid}")
+    public String editingComment(@PathVariable("itemId") long itemId,@PathVariable("commentid") long commentid, CM cm)
+            throws CommentNotFound {
+        itemService.updateComment(commentid,cm.getMessage());
+        return "redirect:/item/view/" + itemId;
     }
 }

@@ -1,27 +1,32 @@
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\Attachment.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\Item.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\dao\AttachmentRepository.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\ItemServiceImpl.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\exception\AttachmentNotFound.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\UserRole.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\controller\IndexController.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\AttachmentServiceImpl.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\ItemService.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\ItemUser.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\view\DownloadingView.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\dao\UserRoleRepository.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\OrderHistory.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\model\GuestBookEntry.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\exception\ItemNotFound.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\dao\OrderHistoryRepository.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\controller\ItemUserController.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\controller\CartController.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\ItemUserService.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\controller\ItemController.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\AttachmentService.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\exception\UserNotFound.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\OrderHistoryServiceImpl.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\controller\GuestBookController.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\dao\ItemUserRepository.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\service\OrderHistoryService.java
-D:\Google ¶³ºÝµwºÐ\OUHK\Year 4\Sem 2\Web App\Group Project\Group_3_Group_Project\src\main\java\ouhk\comps380f\dao\ItemRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\ItemService.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\ItemUserRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\ItemServiceImpl.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\OrderHistory.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\ItemRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\ItemUserService.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\exception\CommentNotFound.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\AttachmentService.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\AttachmentServiceImpl.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\OrderHistoryService.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\controller\ItemUserController.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\Attachment.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\controller\GuestBookController.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\OrderHistoryRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\controller\IndexController.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\controller\ItemController.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\Item.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\Comment.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\view\DownloadingView.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\CommentServiceImpl.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\controller\CartController.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\UserRole.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\exception\AttachmentNotFound.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\CommentRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\OrderHistoryServiceImpl.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\UserRoleRepository.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\exception\UserNotFound.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\ItemUser.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\exception\ItemNotFound.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\model\GuestBookEntry.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\service\CommentService.java
+D:\GithubDoc\Teletubbies-Learning-Journal\src\main\java\ouhk\comps380f\dao\AttachmentRepository.java
