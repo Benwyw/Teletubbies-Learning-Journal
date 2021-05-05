@@ -1,5 +1,7 @@
 package ouhk.comps380f.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +16,26 @@ public class OrderHistoryServiceImpl implements OrderHistoryService{
     
     @Override
     @Transactional
-    public OrderHistory getOrderHistory(String name) {
-        return orderhistoryRepo.findByUsername(name);
+    public void createOrderHistory(String username, int item_id, int quantity, String datetime){
+        OrderHistory orderhistory = new OrderHistory();
+        orderhistory.setUsername(username);
+        orderhistory.setItem_id(item_id);
+        orderhistory.setQuantity(quantity);
+        orderhistory.setDatetime(datetime);
+        orderhistoryRepo.save(orderhistory);
+    }
+    
+    @Override
+    @Transactional
+    public List<OrderHistory> getOrderHistory(String name) {
+        List<OrderHistory> orderhistory = orderhistoryRepo.findAll();
+        List<OrderHistory> orderhistory_return = new ArrayList<>();
+        
+        for(OrderHistory oh : orderhistory){
+            if(oh.getUsername().equals(name)){
+                orderhistory_return.add(oh);
+            }
+        }
+        return orderhistory_return;
     }
 }
