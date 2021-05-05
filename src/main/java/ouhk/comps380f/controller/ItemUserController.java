@@ -24,18 +24,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 import ouhk.comps380f.dao.ItemUserRepository;
+import ouhk.comps380f.exception.UserNotFound;
 import ouhk.comps380f.model.ItemUser;
 import ouhk.comps380f.model.UserRole;
 import ouhk.comps380f.service.ItemUserService;
 
-
 @Controller
 @RequestMapping("/user")
 public class ItemUserController {
-     
+
     @Autowired
     private ItemUserService itemUserService;
-     @Resource
+    @Resource
     ItemUserRepository itemUserRepo;
 
     @GetMapping({"", "/list"})
@@ -45,6 +45,7 @@ public class ItemUserController {
     }
 
     public static class Form {
+
         private String username;
         private String password;
         private String fullname;
@@ -74,7 +75,7 @@ public class ItemUserController {
 
         public void setRoles(String[] roles) {
             this.roles = roles;
-        } 
+        }
 
         public String getFullname() {
             return fullname;
@@ -99,7 +100,7 @@ public class ItemUserController {
         public void setAddress(String address) {
             this.address = address;
         }
-        
+
     }
 
     @GetMapping("/create")
@@ -110,11 +111,12 @@ public class ItemUserController {
     @PostMapping("/create")
     public View create(Form form) throws IOException {
         ItemUser user = new ItemUser(form.getUsername(),
-               form.getPassword(), form.getRoles(),form.getFullname(),form.getPhone(),form.getAddress()
+                form.getPassword(), form.getRoles(), form.getFullname(), form.getPhone(), form.getAddress()
         );
         itemUserRepo.save(user);
         return new RedirectView("/user/list", true);
     }
+
     @GetMapping("/register")
     public ModelAndView register() {
         return new ModelAndView("registerUser", "reitemUser", new Form());
@@ -122,9 +124,9 @@ public class ItemUserController {
 
     @PostMapping("/register")
     public View register(Form form) throws IOException {
-        String[] role={"ROLE_USER"};
+        String[] role = {"ROLE_USER"};
         ItemUser user = new ItemUser(form.getUsername(),
-                form.getPassword(),role,form.getFullname(),form.getPhone(),form.getAddress()
+                form.getPassword(), role, form.getFullname(), form.getPhone(), form.getAddress()
         );
         itemUserRepo.save(user);
         return new RedirectView("/login", true);
@@ -135,37 +137,36 @@ public class ItemUserController {
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
-    
+
     @GetMapping({"/editUser"})
     public View editUser(Principal principal) {
-        String path = "/user/editUser/"+principal.getName();
+        String path = "/user/editUser/" + principal.getName();
         return new RedirectView(path, true);
     }
-    
-     @GetMapping("/editUser/{username}")
-    public ModelAndView showEdit(@PathVariable("username")  String username,
+
+    @GetMapping("/editUser/{username}")
+    public ModelAndView showEdit(@PathVariable("username") String username,
             Principal principal, HttpServletRequest request) {
         //Security: If role is not admin, then check if the user to be edited equals current user
-        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")){
-            if (!principal.getName().equals(username)){
+        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")) {
+            if (!principal.getName().equals(username)) {
                 return new ModelAndView("list"); //No permission to access
             }
         }
         ItemUser user = itemUserService.getItemUser(username);
-        if (user == null ) {
+        if (user == null) {
             return new ModelAndView(new RedirectView("/item/list", true));
         }
-        
+
         List<GrantedAuthority> authorities = new ArrayList<>();
         for (UserRole role : user.getRoles()) {
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
         //String[] rolelist = authorities.toArray(new String[0]);
         ModelAndView modelAndView;
-        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")){
+        if (!principal.toString().split("Granted Authorities")[1].contains("ROLE_ADMIN")) {
             modelAndView = new ModelAndView("editUser2"); //user view
-        }
-        else{
+        } else {
             modelAndView = new ModelAndView("editUser"); //admin view
         }
         modelAndView.addObject("user", user);
@@ -176,9 +177,23 @@ public class ItemUserController {
         edituserForm.setFullname(user.getFullname());
         edituserForm.setPhone(user.getPhone());
         edituserForm.setAddress(user.getAddress());
-       // edituserForm.setRoles(rolelist);
+        // edituserForm.setRoles(rolelist);
         modelAndView.addObject("edituserForm", edituserForm);
 
         return modelAndView;
+    }
+
+    @PostMapping("/editUser/{username}")
+    public View adminEditUser(@PathVariable("username") String username, Form form,
+            Principal principal, HttpServletRequest request)
+            throws IOException, UserNotFound {
+        ItemUser itemUser = itemUserService.getItemUser(username);
+        if (itemUser == null
+                || (!request.isUserInRole("ROLE_ADMIN"))) {
+            return new RedirectView("/user/list", true);
+        }
+        itemUserService.updateItemUser(username, form.getPassword(),
+                form.getFullname(), form.getPhone(),form.getAddress(),form.getRoles());
+        return new RedirectView("/user/list", true);
     }
 }
