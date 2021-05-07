@@ -30,9 +30,11 @@ import ouhk.comps380f.exception.CommentNotFound;
 import ouhk.comps380f.exception.UserNotFound;
 import ouhk.comps380f.model.Comment;
 import ouhk.comps380f.model.ItemUser;
+import ouhk.comps380f.model.OrderHistory;
 import ouhk.comps380f.model.UserRole;
 import ouhk.comps380f.service.ItemService;
 import ouhk.comps380f.service.ItemUserService;
+import ouhk.comps380f.service.OrderHistoryService;
 
 @Controller
 @RequestMapping("/user")
@@ -47,6 +49,8 @@ public class ItemUserController {
     @Resource
     ItemUserRepository itemUserRepo;
     
+    @Autowired
+    private OrderHistoryService orderhistoryService;
     @Resource
     OrderHistoryRepository orderHistoryRepo;
     
@@ -152,13 +156,16 @@ public class ItemUserController {
 
     @GetMapping("/delete/{username}")
     public View deleteTicket(@PathVariable("username") String username) throws CommentNotFound{
-        
         List<Comment> comments=commentRepo.findByUsername(username);
         for (Comment comment : comments){
             itemService.deleteComment(comment.getItem_id(),comment.getId());
         }
+        List<OrderHistory> orderhistory = orderhistoryService.getOrderHistory(username);
         
-        //orderHistoryRepo.delete(orderHistoryRepo.findByUsername(username));
+        for (OrderHistory oh : orderhistory){
+            System.out.println("DELETED: "+oh);
+            orderHistoryRepo.delete(oh);
+        }
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
