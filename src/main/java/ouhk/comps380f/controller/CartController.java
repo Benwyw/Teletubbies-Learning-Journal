@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ouhk.comps380f.dao.OrderHistoryRepository;
+import ouhk.comps380f.model.Item;
 import ouhk.comps380f.model.OrderHistory;
 import ouhk.comps380f.service.ItemService;
 import ouhk.comps380f.service.OrderHistoryService;
@@ -55,9 +56,7 @@ public class CartController {
         String name = principal.getName();
         
         List<OrderHistory> orderhistory = orderhistoryService.getOrderHistory(name);
-        
         model.addAttribute("orderhistory", orderhistory);
-        model.addAttribute("itemDatabase", itemService.getItem());
         
         return "orderhistory";
     }
@@ -74,11 +73,15 @@ public class CartController {
         if (cart != null){
             for (Map.Entry<Integer, Integer> entry : cart.entrySet()){
                 System.out.println(entry.getKey() + "/" + entry.getValue());
-
+                List<Item> items = itemService.getItem();
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
                 LocalDateTime now = LocalDateTime.now();
-
-                orderhistoryService.createOrderHistory(name, (int)entry.getKey(), (int)entry.getValue(), now.toString());
+                
+                for (Item item: items){
+                    if (item.getId() == entry.getKey()){
+                        orderhistoryService.createOrderHistory(name, (String)item.getItemName(), (int)entry.getValue(), now.toString());
+                    }
+                }
             }
         
             session.removeAttribute("cart");

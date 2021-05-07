@@ -19,8 +19,8 @@ public class OrderHistory implements Serializable {
     @Column(name = "username")
     private String username;
     
-    @Column(name = "item_id")
-    private int item_id;
+    @Column(name = "item_name")
+    private String item_name;
     
     @Column(name = "quantity")
     private int quantity;
@@ -31,9 +31,9 @@ public class OrderHistory implements Serializable {
     public OrderHistory() {
     }
     
-    public OrderHistory(String username, int item_id, int quantity, String datetime){
+    public OrderHistory(String username, String item_name, int quantity, String datetime){
         this.username = username;
-        this.item_id = item_id;
+        this.item_name = item_name;
         this.quantity = quantity;
         this.datetime = datetime;
     }
@@ -54,12 +54,12 @@ public class OrderHistory implements Serializable {
         this.username = username;
     }
 
-    public int getItem_id() {
-        return item_id;
+    public String getItem_name() {
+        return item_name;
     }
 
-    public void setItem_id(int item_id) {
-        this.item_id = item_id;
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
     }
 
     public int getQuantity() {

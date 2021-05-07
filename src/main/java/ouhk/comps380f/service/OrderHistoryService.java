@@ -5,6 +5,6 @@ import ouhk.comps380f.model.OrderHistory;
 
 public interface OrderHistoryService {
     
-    public void createOrderHistory(String username, int item_id, int quantity, String datetime);
+    public void createOrderHistory(String username, String item_name, int quantity, String datetime);
     public List<OrderHistory> getOrderHistory(String name);
 }

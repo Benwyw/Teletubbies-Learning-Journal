@@ -37,12 +37,11 @@ CREATE TABLE attachment (
 CREATE TABLE history(
     order_id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
     username VARCHAR(50) NOT NULL,
-    item_id INTEGER DEFAULT NULL,
+    item_name VARCHAR(255) DEFAULT NULL,
     quantity INTEGER NOT NULL,
     datetime CHAR(30) NOT NULL,
     PRIMARY KEY(order_id),
-    FOREIGN KEY (username) REFERENCES users(username),
-    FOREIGN KEY (item_id) REFERENCES item(id)
+    FOREIGN KEY (username) REFERENCES users(username)
 );
 
 CREATE TABLE comment(
@@ -69,9 +68,9 @@ INSERT INTO item(itemName,description, price, isabailability) VALUES ('Burger','
 INSERT INTO item(itemName,description, price, isabailability) VALUES ('Hotdog', 'This is Hotdog',30, TRUE);
 INSERT INTO item(itemName,description, price, isabailability) VALUES ('Coke', 'This is Coke',10, TRUE);
 
-INSERT INTO history(username,item_id,quantity,datetime) VALUES ('user1', 1,3, '2021-05-05T22:57:12.504');
-INSERT INTO history(username,item_id,quantity,datetime) VALUES ('user1', 2,1, '2021-05-06T22:59:10.504');
-INSERT INTO history(username,item_id,quantity,datetime) VALUES ('user2', 3,1, '2021-05-06T23:58:11.504');
+INSERT INTO history(username,item_name,quantity,datetime) VALUES ('user1', 'Burger',3, '2021-05-05T22:57:12.504');
+INSERT INTO history(username,item_name,quantity,datetime) VALUES ('user1', 'Hotdog',1, '2021-05-06T22:59:10.504');
+INSERT INTO history(username,item_name,quantity,datetime) VALUES ('user2', 'Coke',1, '2021-05-06T23:58:11.504');
 
 INSERT INTO comment(username,comment,item_id) VALUES ('user1', 'Delicious!', 1);
 INSERT INTO comment(username,comment,item_id) VALUES ('user2', 'Delicious +1', 1);

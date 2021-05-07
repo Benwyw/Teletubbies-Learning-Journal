@@ -30,7 +30,6 @@
         <br/>
         
         <c:set var="oh" value="${orderhistory}" />
-        <c:set var="item" value="${itemDatabase}" />
 
         <c:choose>
             <c:when test="${fn:length(orderhistory) == 0}">
@@ -38,7 +37,7 @@
             </c:when>
             <c:otherwise>
                 <c:forEach var="history" items="${oh}">
-                        <li>${item[history.item_id-1].itemName} (qty: ${history.quantity}) ${history.datetime}</li>
+                        <li>${history.item_name} (qty: ${history.quantity}) ${history.datetime}</li>
                 </c:forEach>
             </c:otherwise>
         </c:choose>

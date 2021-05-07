@@ -16,10 +16,10 @@ public class OrderHistoryServiceImpl implements OrderHistoryService{
     
     @Override
     @Transactional
-    public void createOrderHistory(String username, int item_id, int quantity, String datetime){
+    public void createOrderHistory(String username, String item_name, int quantity, String datetime){
         OrderHistory orderhistory = new OrderHistory();
         orderhistory.setUsername(username);
-        orderhistory.setItem_id(item_id);
+        orderhistory.setItem_name(item_name);
         orderhistory.setQuantity(quantity);
         orderhistory.setDatetime(datetime);
         orderhistoryRepo.save(orderhistory);
