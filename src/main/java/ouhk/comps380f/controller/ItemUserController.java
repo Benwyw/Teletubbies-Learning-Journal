@@ -23,11 +23,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
+import ouhk.comps380f.dao.CommentRepository;
 import ouhk.comps380f.dao.ItemUserRepository;
+import ouhk.comps380f.dao.OrderHistoryRepository;
 import ouhk.comps380f.exception.UserNotFound;
 import ouhk.comps380f.model.ItemUser;
 import ouhk.comps380f.model.UserRole;
 import ouhk.comps380f.service.ItemUserService;
+import ouhk.comps380f.service.OrderHistoryService;
 
 @Controller
 @RequestMapping("/user")
@@ -37,6 +40,12 @@ public class ItemUserController {
     private ItemUserService itemUserService;
     @Resource
     ItemUserRepository itemUserRepo;
+    
+    @Resource
+    OrderHistoryRepository orderHistoryRepo;
+    
+    @Resource
+    CommentRepository commentRepo;
 
     @GetMapping({"", "/list"})
     public String list(ModelMap model) {
@@ -137,6 +146,8 @@ public class ItemUserController {
 
     @GetMapping("/delete/{username}")
     public View deleteTicket(@PathVariable("username") String username) {
+        commentRepo.delete(commentRepo.findByUsername(username));
+        orderHistoryRepo.delete(orderHistoryRepo.findByUsername(username));
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
