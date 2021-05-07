@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Customer Support</title>
+        <title>Create Item</title>
     </head>
     <style>
         input[type="file"] {
@@ -42,12 +42,14 @@
                    modelAttribute="itemForm">
             <form:label path="itemName">Item Name</form:label><br />
             <form:input type="text" path="itemName" /><br /><br />
+            <form:label path="description">Description</form:label><br />
+            <form:input type="text" path="description" /><br /><br />
             <form:label path="price">Price</form:label><br />
             <form:input type="number" path="price" /><br /><br />
-            <form:label path="isabailability">Item is available</form:label><br />
+            <form:label path="isabailability">Availability of item:</form:label><br />
             Is available <form:radiobutton path="isabailability" value="true"/>  
             Not available <form:radiobutton path="isabailability" value="false"/><br /><br />  
-            <b>Attachments</b><br />
+            <b>Photo(s)</b><br />
             <div class="div_fileInput">
                 <input type="file" onchange="javascript:updateList()" id="file" name="attachments" multiple="multiple" /><br />
                 <div id="message">
@@ -59,6 +61,7 @@
             <br/>
             <input type="submit" value="Submit"/>
         </form:form>
+        <a href="<c:url value="/item" />">Return to list items</a>
         <script>
             updateList = function () {
                 var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];

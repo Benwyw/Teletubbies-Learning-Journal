@@ -57,6 +57,7 @@ public class ItemController {
     public static class Form {
 
         private String itemName;
+        private String description;
         private Double price;
         private Boolean isabailability;
         private List<MultipartFile> attachments;
@@ -67,6 +68,14 @@ public class ItemController {
 
         public void setItemName(String itemName) {
             this.itemName = itemName;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
         }
 
         public Double getPrice() {
@@ -98,7 +107,7 @@ public class ItemController {
 
     @PostMapping("/create")
     public String create(Form form, Principal principal) throws IOException {
-        long itemId = itemService.createItem( form.getItemName(), form.getPrice(),form.getIsabailability(), form.getAttachments());
+        long itemId = itemService.createItem( form.getItemName(),form.getDescription(), form.getPrice(),form.getIsabailability(), form.getAttachments());
         return "redirect:/item/view/" + itemId;
     }
 
@@ -153,6 +162,7 @@ public class ItemController {
 
         Form itemForm = new Form();
         itemForm.setItemName(item.getItemName());
+        itemForm.setDescription(item.getDescription());
         itemForm.setPrice(item.getPrice());
         itemForm.setIsabailability(item.getIsabailability());
         modelAndView.addObject("itemForm", itemForm);
@@ -170,7 +180,7 @@ public class ItemController {
             return "redirect:/item/list";
         }
 
-        itemService.updateItem(itemId, form.getItemName(),
+        itemService.updateItem(itemId, form.getItemName(),form.getDescription(),
                 form.getPrice(),form.getIsabailability(), form.getAttachments());
         return "redirect:/item/view/" + itemId;
     }
@@ -216,7 +226,9 @@ public class ItemController {
     }
     
     @GetMapping("/editcomment/{itemId}/{commentid}")
-    public ModelAndView editComment(@PathVariable("commentid") long commentid){
+    public ModelAndView editComment(@PathVariable("commentid") long commentid,ModelMap model,Principal principal){
+        model.addAttribute("comment",commentService.getComments(commentid));
+        model.addAttribute("username", principal.getName());
         CM cm=new CM();
         cm.setMessage(commentService.getComments(commentid).getComment());
         return new ModelAndView ("EditComment","cm",cm);

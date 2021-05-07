@@ -105,7 +105,10 @@ public class ItemUserController {
 
     @GetMapping("/create")
     public ModelAndView create() {
-        return new ModelAndView("addUser", "itemUser", new Form());
+        Form form = new Form();
+        String[] roles = {"ROLE_USER"};
+        form.setRoles(roles);
+        return new ModelAndView("addUser", "itemUser", form);
     }
 
     @PostMapping("/create")

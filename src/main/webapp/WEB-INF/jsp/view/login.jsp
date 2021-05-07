@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Customer Support Login</title>
+        <title>Login</title>
     </head>
     <body>
+         <security:authorize access="isAuthenticated()"> 
+             <c:redirect url="/item"/>
+         </security:authorize>
         <c:if test="${param.error != null}">
             <p>Login failed.</p>
         </c:if>

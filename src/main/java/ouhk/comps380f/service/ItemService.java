@@ -11,14 +11,14 @@ import ouhk.comps380f.model.Item;
 
 public interface ItemService {
 
-    public long createItem(String itemName, Double price,
+    public long createItem(String itemName,String description, Double price,
            Boolean isabailability, List<MultipartFile> attachments) throws IOException;
 
     public List<Item> getItem();
 
     public Item getItem(long id);
 
-    public void updateItem(long id, String itemName,
+    public void updateItem(long id, String itemName,String description,
             Double price,Boolean isabailability, List<MultipartFile> attachments)
             throws IOException, ItemNotFound;
 

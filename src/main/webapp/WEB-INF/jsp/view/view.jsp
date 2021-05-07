@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Customer Support</title>
+        <title>${item.itemName}</title>
     </head>
     <style>
         .card {
@@ -50,19 +50,33 @@
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
             </form>
         </security:authorize>
-
-        <h2>Item #${item.id}: <c:out value="${item.itemName}" /></h2>
+        
         <security:authorize access="hasRole('ADMIN')">
-            [<a href="<c:url value="/item/edit/${item.id}" />">Edit</a>]
+            <br/>[<a href="<c:url value="/item/edit/${item.id}" />">Edit</a>]
         </security:authorize>
         <security:authorize access="hasRole('ADMIN')">
             [<a href="<c:url value="/item/delete/${item.id}" />">Delete</a>]
         </security:authorize>   
+
+        <h2>Item #${item.id}: <c:out value="${item.itemName}" /></h2>
+        <h4>Price: <c:out value="${item.price}" /></h4>
+        <i>${item.description}</i>
+        <c:choose>
+            <c:when test="${item.isabailability}">
+                <h4>${item.itemName} is <span style="color:blue;">available</span>.</h4>
+            </c:when>
+            <c:otherwise>
+                <h4>${item.itemName} is <span style="color:red;">not available</span>.</h4>
+            </c:otherwise>
+
+        </c:choose>
+
         <br /><br />
-        <i>Item Name - <c:out value="${item.itemName}" /></i><br /><br />
-        <c:out value="${item.price}" /><br /><br />
+        <!--<i>Item Name - <c:out value="${item.itemName}" /></i><br /><br />-->
+
+
         <c:if test="${fn:length(item.attachments) > 0}">
-            Attachments: <br/>
+            Photo(s): <br/>
             <c:forEach items="${item.attachments}" var="attachment"
                        varStatus="status">
                 <c:if test="${!status.first}">, </c:if>

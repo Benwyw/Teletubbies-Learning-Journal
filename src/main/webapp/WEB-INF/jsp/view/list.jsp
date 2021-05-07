@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Customer Support</title>
+        <title>Menu</title>
     </head>
     <body>
         <security:authorize var="isAdmin" access="hasAnyRole('ADMIN')"/>

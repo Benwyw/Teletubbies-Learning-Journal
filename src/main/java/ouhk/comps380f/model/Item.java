@@ -29,6 +29,9 @@ public class Item implements Serializable {
     @Column(name = "itemName")
     private String itemName;
     
+    @Column(name = "description")
+    private String description;
+    
     @Column(name = "price")
     private Double price;
     
@@ -62,6 +65,16 @@ public class Item implements Serializable {
     public void setItemName(String itemName) {
         this.itemName = itemName;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
+    
 
     public Double getPrice() {
         return price;

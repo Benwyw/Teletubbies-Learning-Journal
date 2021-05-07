@@ -67,10 +67,11 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional
-    public long createItem(String itemName, Double price,
+    public long createItem(String itemName, String description,Double price,
             Boolean isabailability, List<MultipartFile> attachments) throws IOException {
         Item item = new Item();
         item.setItemName(itemName);
+        item.setDescription(description);
         item.setPrice(price);
         item.setIsabailability(isabailability);
 
@@ -92,7 +93,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     @Transactional(rollbackFor = ItemNotFound.class)
-    public void updateItem(long id, String itemName,Double price,
+    public void updateItem(long id, String itemName,String description,Double price,
             Boolean isabailability, List<MultipartFile> attachments)
             throws IOException, ItemNotFound {
         Item updatedItem = itemRepo.findById(id).orElse(null);
@@ -101,6 +102,7 @@ public class ItemServiceImpl implements ItemService {
         }
 
         updatedItem.setItemName(itemName);
+        updatedItem.setDescription(description);
         updatedItem.setPrice(price);
         updatedItem.setIsabailability(isabailability);
 
