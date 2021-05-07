@@ -19,5 +19,5 @@ import ouhk.comps380f.model.Comment;
  */
 public interface CommentRepository extends JpaRepository<Comment,Long>{
     
-    public Comment findByUsername(String name);
+    public List<Comment> findByUsername(String name);
 }
