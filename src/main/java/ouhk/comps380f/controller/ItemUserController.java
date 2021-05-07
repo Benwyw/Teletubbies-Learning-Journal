@@ -28,6 +28,7 @@ import ouhk.comps380f.dao.ItemUserRepository;
 import ouhk.comps380f.dao.OrderHistoryRepository;
 import ouhk.comps380f.exception.UserNotFound;
 import ouhk.comps380f.model.ItemUser;
+import ouhk.comps380f.model.OrderHistory;
 import ouhk.comps380f.model.UserRole;
 import ouhk.comps380f.service.ItemUserService;
 import ouhk.comps380f.service.OrderHistoryService;
@@ -41,6 +42,8 @@ public class ItemUserController {
     @Resource
     ItemUserRepository itemUserRepo;
     
+    @Autowired
+    private OrderHistoryService orderhistoryService;
     @Resource
     OrderHistoryRepository orderHistoryRepo;
     
@@ -146,8 +149,18 @@ public class ItemUserController {
 
     @GetMapping("/delete/{username}")
     public View deleteTicket(@PathVariable("username") String username) {
-        commentRepo.delete(commentRepo.findByUsername(username));
-        orderHistoryRepo.delete(orderHistoryRepo.findByUsername(username));
+        System.out.println("HELLOOOOOOOOOOOOOOOOOOOO");
+        //commentRepo.delete(commentRepo.findByUsername(username));
+        //System.out.println("cR: "+commentRepo.findByUsername(username));
+        //System.out.println("oH: "+orderHistoryRepo.findByUsername(username));
+        //orderHistoryRepo.delete(orderHistoryRepo.findByUsername(username));
+        List<OrderHistory> orderhistory = orderhistoryService.getOrderHistory(username);
+        
+        for (OrderHistory oh : orderhistory){
+            System.out.println("DELETED: "+oh);
+            orderHistoryRepo.delete(oh);
+        }
+        
         itemUserRepo.delete(itemUserRepo.findById(username).orElse(null));
         return new RedirectView("/user/list", true);
     }
