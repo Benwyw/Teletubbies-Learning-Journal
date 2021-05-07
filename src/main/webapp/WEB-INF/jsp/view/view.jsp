@@ -93,12 +93,10 @@
                         <h4><b>${comment.username}</b></h4>
                         <p>${comment.comment}</p>
                         <p>
-                            <security:authorize access="isAuthenticated()">
-                                <c:if test="${comment.username==principal.username}">
-                                    <span style="color: blue">[<a style="color: blue" href="<c:url value="/item/editcomment/${item.id}/${comment.id}" />">Edit Comment</a>]</span>
-                                </c:if>
-                            </security:authorize>
-                            <security:authorize access="isAuthenticated() or hasRole('ADMIN') ">
+                          
+                          
+                                    
+                            <security:authorize access=" hasRole('ADMIN') ">
                                 <c:if test="${(comment.username == principal.username) or isAdmin}">
                                     <span style="color: red"> [<a style="color: red" href="<c:url value="/item/deletecomment/${item.id}/${comment.id}" />">Delete Comment</a>]</span>
                                 </c:if>
