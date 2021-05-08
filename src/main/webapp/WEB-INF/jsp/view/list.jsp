@@ -59,7 +59,7 @@
                         <a href="<c:url value="/item/view/${item.id}" />">
                             <c:out value="${item.itemName}" /></a>
                         (price: <c:out value="${item.price}" />)
-                        <c:if test="${item.isabailability eq true or isAdmin}">
+                        <c:if test="${item.isabailability}">
                         <security:authorize access="hasRole('USER')">
                             [<a href="<c:url value="/cart/add/${item.id}" />">Add to Cart</a>]
                         </security:authorize>
