@@ -301,7 +301,13 @@ public class ItemUserController {
         if (itemUser == null) {
             return new RedirectView("/item/list", true);
         }
-        String[] role = {"ROLE_USER"};
+        //String[] role = {"ROLE_USER"};
+        List<UserRole> temp = itemUser.getRoles();
+        List<String> temp2 = new ArrayList();
+        for(UserRole userRole : temp){
+            temp2.add(userRole.getRole());
+        }
+        String[] role = temp2.toArray(new String[0]);
         itemUserService.updateItemUser(username, form.getPassword(),
                 form.getFullname(), form.getPhone(), form.getAddress(), role);
         return new RedirectView("/item/list", true);
