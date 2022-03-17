@@ -8,7 +8,7 @@
   <h3 align="center">Fast Food Ordering System</h3>
 
   <p align="center">
-    COMP S380F 2021 - Web APplications: Design and Development - Teletubbies Learning Journal (Group 3)
+    COMP S380F 2021 - Web Applications: Design and Development - Teletubbies Learning Journal (Group 3)
   </p>
   <p align="center">
     Project Overall: 27.8/30
