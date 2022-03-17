@@ -11,7 +11,7 @@
     COMP S380F 2021 - Web Applications: Design and Development - Teletubbies Learning Journal (Group 3)
     <br />
     <br />
-    <a href="https://drive.google.com/file/d/1a3mdCLXxDOB1jim_anFPDiIPNPAUo2s5/view?usp=sharing">Project Requirements</a>
+    <a href="https://drive.google.com/file/d/160dAe1ZfJYsDJScGzQGAxHEYasxVqqZO/view?usp=sharing">Project Requirements</a>
   </p>
   <p align="center">
     Project Overall: 27.8/30
